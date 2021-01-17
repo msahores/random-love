@@ -7,10 +7,10 @@ import Dots from './Dots';
 
 interface Props {
   slides: string[],
-  autoPlay: number,
+  autoPlay?: number,
 }
 
-const Slider:FC<Props> = ({slides = [], autoPlay}) => {
+const Slider:FC<Props> = ({ slides = [], autoPlay } ) => {
 
   const getWidth = () => window.innerWidth;
   const [ translate, setTranslate ] = useState(0);
@@ -21,14 +21,18 @@ const Slider:FC<Props> = ({slides = [], autoPlay}) => {
     const play = () => {
       autoPlayRef.current();
     }
-
-    const interval = setInterval(play, autoPlay * 1000)
+    let interval: NodeJS.Timeout;
+    if(autoPlay){
+      interval = setInterval(play, autoPlay * 1000)
+    }
     return () => clearInterval(interval)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(()=>{
-    autoPlayRef.current = nextSlide;
+    if(autoPlay){
+      autoPlayRef.current = nextSlide;
+    }
   });
 
   const nextSlide = () => {
@@ -41,8 +45,8 @@ const Slider:FC<Props> = ({slides = [], autoPlay}) => {
     }
   }
 
-  const autoPlayRef = useRef(nextSlide);
-
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const autoPlayRef = autoPlay ? useRef(nextSlide) : useRef(()=>null);
 
   const prevSlide = () => {
     if (activeSlide === 0) {
@@ -64,8 +68,10 @@ const Slider:FC<Props> = ({slides = [], autoPlay}) => {
           <Slide key={slide + i} content={slide} />
         ))}
       </SliderContent>
+      {!autoPlay && <>
       <Arrow direction="left" handleClick={prevSlide} />
       <Arrow direction="right" handleClick={nextSlide} />
+      </>}
       <Dots slides={slides} activeSlide={activeSlide} />
     </Container>
   )}

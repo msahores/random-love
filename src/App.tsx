@@ -10,7 +10,8 @@ function App() {
   ];
 
   return (
-    <Slider slides={images} autoPlay={2} />
+    // <Slider slides={images} autoPlay={2} />
+    <Slider slides={images} />
   );
 }
 
