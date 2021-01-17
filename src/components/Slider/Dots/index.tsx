@@ -7,7 +7,7 @@ interface PropsCSS {
 
 interface Props {
     slides: any[],
-    activeIndex: any
+    activeSlide: any
 }
 
 const Dot = styled.span<PropsCSS> `
@@ -27,10 +27,10 @@ const DotsCSS = styled.div `
   justify-content: center;
 `;
 
-const Dots: FC<Props> = ({ slides, activeIndex }) => (
+const Dots: FC<Props> = ({ slides, activeSlide }) => (
   <DotsCSS>
     {slides.map((slide, i)  => (
-      <Dot key={slide} active={activeIndex === i} />
+      <Dot key={slide} active={activeSlide === i} />
     ))}
   </DotsCSS>
 )

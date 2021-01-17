@@ -15,7 +15,7 @@ const Slider:FC<Props> = ({slides = [], autoPlay}) => {
   const getWidth = () => window.innerWidth;
   const [ translate, setTranslate ] = useState(0);
   const [ transition ] = useState(0.45);
-  const [ activeIndex, setActiveIndex ] = useState(0);
+  const [ activeSlide, setActiveSlide ] = useState(0);
 
   useEffect(() => {
     const play = () => {
@@ -24,30 +24,32 @@ const Slider:FC<Props> = ({slides = [], autoPlay}) => {
 
     const interval = setInterval(play, autoPlay * 1000)
     return () => clearInterval(interval)
-  }, [autoPlay])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(()=>{
     autoPlayRef.current = nextSlide;
   });
 
   const nextSlide = () => {
-    if (activeIndex === slides.length - 1) {
+    if (activeSlide === slides.length - 1) {
       setTranslate(0);
-      setActiveIndex(0);
+      setActiveSlide(0);
     } else {
-    setActiveIndex(prevActiveIndex => prevActiveIndex + 1)
+    setActiveSlide(prevactiveSlide => prevactiveSlide + 1)
     setTranslate(prevTranslate => prevTranslate + getWidth());
     }
   }
 
   const autoPlayRef = useRef(nextSlide);
 
+
   const prevSlide = () => {
-    if (activeIndex === 0) {
+    if (activeSlide === 0) {
       setTranslate((slides.length - 1) * getWidth());
-      setActiveIndex(slides.length - 1)
+      setActiveSlide(slides.length - 1)
     } else {
-      setActiveIndex(prevActiveIndex => prevActiveIndex - 1);
+      setActiveSlide(prevactiveSlide => prevactiveSlide - 1);
       setTranslate(prevTranslate => prevTranslate - getWidth());
     }
   }
@@ -64,7 +66,7 @@ const Slider:FC<Props> = ({slides = [], autoPlay}) => {
       </SliderContent>
       <Arrow direction="left" handleClick={prevSlide} />
       <Arrow direction="right" handleClick={nextSlide} />
-      <Dots slides={slides} activeIndex={activeIndex} />
+      <Dots slides={slides} activeSlide={activeSlide} />
     </Container>
   )}
 
