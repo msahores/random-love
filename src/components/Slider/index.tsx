@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useRef } from 'react';
 import SliderContent from '../SliderContent';
 import { Container } from './index.styles';
 import Slide from '../Slide';
@@ -6,15 +6,29 @@ import Arrow from '../Arrow';
 import Dots from '../Dots';
 
 interface Props {
-  slides: string[]
+  slides: string[],
+  autoPlay: number,
 }
 
-const Slider:FC<Props> = ({slides = []}) => {
+const Slider:FC<Props> = ({slides = [], autoPlay}) => {
 
   const getWidth = () => window.innerWidth;
   const [ translate, setTranslate ] = useState(0);
   const [ transition ] = useState(0.45);
   const [ activeIndex, setActiveIndex ] = useState(0);
+
+  useEffect(() => {
+    const play = () => {
+      autoPlayRef.current();
+    }
+
+    const interval = setInterval(play, autoPlay * 1000)
+    return () => clearInterval(interval)
+  }, [])
+
+  useEffect(()=>{
+    autoPlayRef.current = nextSlide;
+  });
 
   const nextSlide = () => {
     if (activeIndex === slides.length - 1) {
@@ -25,6 +39,8 @@ const Slider:FC<Props> = ({slides = []}) => {
     setTranslate(prevTranslate => prevTranslate + getWidth());
     }
   }
+
+  const autoPlayRef = useRef(nextSlide);
 
   useEffect(()=>{
     console.log("active index", activeIndex);
