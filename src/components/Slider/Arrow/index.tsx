@@ -12,7 +12,7 @@ const Container = styled.div<Props>`
   display: flex;
   position: absolute;
   top: 50%;
-  ${({ direction }) => direction === 'right' ? `right: 25px` : `left: 25px`};
+  ${({ direction }) => (direction === 'right' ? 'right: 25px' : 'left: 25px')};
   height: 50px;
   width: 50px;
   justify-content: center;
@@ -25,7 +25,7 @@ const Container = styled.div<Props>`
     transform: scale(1.1);
   }
   img {
-    transform: translateX(${({ direction }) => direction === 'left' ? '-2' : '2'}px);
+    transform: translateX(${({ direction }) => (direction === 'left' ? '-2' : '2')}px);
     &:focus {
       outline: 0;
     }
@@ -33,13 +33,16 @@ const Container = styled.div<Props>`
 `;
 
 const Arrow: FC<Props> = ({ direction = 'right', handleClick }) => (
-    <Container direction={direction} handleClick={handleClick}>
-        <div
-          onClick={handleClick}
-        >
-          {direction === 'right' ? <img src={rightArrow} alt="" /> : <img src={leftArrow} alt="" />}
-        </div>
-    </Container>
-)
+  <Container direction={direction} handleClick={handleClick}>
+    <div
+      onClick={handleClick}
+      onKeyPress={handleClick}
+      role="button"
+      tabIndex={0}
+    >
+      {direction === 'right' ? <img src={rightArrow} alt="" /> : <img src={leftArrow} alt="" />}
+    </div>
+  </Container>
+);
 
 export default Arrow;

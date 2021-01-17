@@ -1,5 +1,6 @@
-import React, { FC }  from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
+import { SlideT } from '../index';
 
 interface PropsCSS {
     active: boolean
@@ -10,15 +11,15 @@ interface Props {
     activeSlide: any
 }
 
-const Dot = styled.span<PropsCSS> `
-      padding: 10px;
-      margin-right: 5px;
-      cursor: pointer;
+const Dot = styled.span<PropsCSS>`
+      padding: 8px;
+      margin-right: 8px;
       border-radius: 50%;
-      background: ${({active}) => active ? 'black' : 'white'};
+      background: ${({ active }) => (active ? 'black' : 'white')};
+      opacity: 0.5;
 `;
 
-const DotsCSS = styled.div `
+const DotsCSS = styled.div`
   position: absolute;
   bottom: 25px;
   width: 100%;
@@ -29,10 +30,10 @@ const DotsCSS = styled.div `
 
 const Dots: FC<Props> = ({ slides, activeSlide }) => (
   <DotsCSS>
-    {slides.map((slide, i)  => (
-      <Dot key={slide} active={activeSlide === i} />
+    {slides.map((slide: SlideT, i: number) => (
+      <Dot key={slide.id} active={activeSlide === i} />
     ))}
   </DotsCSS>
-)
+);
 
 export default Dots;

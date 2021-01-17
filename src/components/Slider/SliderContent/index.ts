@@ -8,7 +8,7 @@ type Props = {
 
 const SliderContent = styled.div<Props>`
   transform: translateX(-${({ translate }) => translate}px);
-  transition: transform ease-out ${({transition}) => transition}s;
+  transition: transform ease-out ${({ transition }) => transition}s;
   height: 100%;
   width: ${({ width }) => width}px;
   display: flex;
