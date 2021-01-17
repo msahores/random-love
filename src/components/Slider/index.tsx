@@ -1,9 +1,9 @@
 import React, { FC, useState, useEffect, useRef } from 'react';
-import SliderContent from '../SliderContent';
+import SliderContent from './Dots/SliderContent';
 import { Container } from './index.styles';
-import Slide from '../Slide';
-import Arrow from '../Arrow';
-import Dots from '../Dots';
+import Slide from './Slide';
+import Arrow from './Arrow';
+import Dots from './Dots';
 
 interface Props {
   slides: string[],
@@ -24,7 +24,7 @@ const Slider:FC<Props> = ({slides = [], autoPlay}) => {
 
     const interval = setInterval(play, autoPlay * 1000)
     return () => clearInterval(interval)
-  }, [])
+  }, [autoPlay])
 
   useEffect(()=>{
     autoPlayRef.current = nextSlide;
@@ -41,11 +41,6 @@ const Slider:FC<Props> = ({slides = [], autoPlay}) => {
   }
 
   const autoPlayRef = useRef(nextSlide);
-
-  useEffect(()=>{
-    console.log("active index", activeIndex);
-    console.log("translate", translate);
-  }, [activeIndex, translate])
 
   const prevSlide = () => {
     if (activeIndex === 0) {

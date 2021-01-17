@@ -13,4 +13,3 @@ const Slide = styled.div<Props>`
     `;
 
 export default Slide;
-//checked

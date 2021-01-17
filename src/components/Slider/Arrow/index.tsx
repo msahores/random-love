@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import rightArrow from '../../img/right-arrow.svg';
-import leftArrow from '../../img/left-arrow.svg';
+import rightArrow from '../img/right-arrow.svg';
+import leftArrow from '../img/left-arrow.svg';
 
 interface Props {
   direction: string,
@@ -12,7 +12,7 @@ const Container = styled.div<Props>`
   display: flex;
   position: absolute;
   top: 50%;
-  ${({ direction })=>direction === 'right' ? `right: 25px` : `left: 25px`};
+  ${({ direction }) => direction === 'right' ? `right: 25px` : `left: 25px`};
   height: 50px;
   width: 50px;
   justify-content: center;
