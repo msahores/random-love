@@ -21,8 +21,8 @@ const App: FC = () => {
   ];
 
   return (
-    <Slider slides={images} autoPlay={2} />
-    // <Slider slides={images} />
+    // <Slider slides={images} autoPlay={3} />
+    <Slider slides={images} />
   );
 };
 
