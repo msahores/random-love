@@ -32,7 +32,6 @@ const useGetImages = (accessKey: string): UseUnsplashT => {
   const api = useRef(createApi({ accessKey }));
 
   useEffect(() => {
-    console.log('category', category);
     api.current.search
       .getPhotos({
         query: category,
