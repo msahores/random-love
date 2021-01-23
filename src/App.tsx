@@ -4,7 +4,7 @@ import useGetImages from './components/hooks/useGetImages';
 
 const App: FC = () => {
   const [slides, setSlides] = useState([]);
-  const [images, setCategory] = useGetImages(process.env.REACT_APP_ACCESS_KEY as string);
+  const [images, setCategory] = useGetImages('SEB7Gy1equIna2E1uHid3lxAk_TcdW-hOk3PW2lB5n4');
 
   useEffect(() => {
     const param = window.location.pathname.slice(1);
