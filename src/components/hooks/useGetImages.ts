@@ -37,7 +37,7 @@ const useGetImages = (accessKey: string): UseUnsplashT => {
         query: category,
         orientation: 'landscape',
         page: 1,
-        perPage: 30,
+        perPage: 40,
         // color: 'yellow'
       })
       .then((result: any) => {
