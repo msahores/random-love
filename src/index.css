@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.App {
+  background-color: black;
+}
+
+.sliderContainer {
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+}

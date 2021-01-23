@@ -30,6 +30,8 @@
       "react/require-default-props": 0,
       "dot-notation": 0,
       "react/prop-types": 0,
+      "no-console": 0,
+      "no-unused-vars": 1,
       "react/no-unescaped-entities": ["error", {"forbid": [{
         "char": "'",
         "alternatives": ["&apos;"]

@@ -1,29 +1,33 @@
-import React, { FC } from 'react';
-import Slider from './components/Slider';
+import React, { FC, useEffect, useState } from 'react';
+import QuickSlider from './components/QuickSlider';
+import useGetImages from './components/hooks/useGetImages';
 
 const App: FC = () => {
-  const images = [{
-    id: 'laksjdchn089q437hnaoksjncp9203',
-    url: 'https://images.unsplash.com/photo-1449034446853-66c86144b0ad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80',
-  },
-  {
-    id: 'klajshnd98q43roiq383823',
-    url: 'https://images.unsplash.com/photo-1470341223622-1019832be824?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2288&q=80',
-  },
-  {
-    id: 'kjhsd9872y398741234',
-    url: 'https://images.unsplash.com/photo-1448630360428-65456885c650?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2094&q=80',
-  },
-  {
-    id: '234980yfash78434',
-    url: 'https://images.unsplash.com/photo-1534161308652-fdfcf10f62c4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2174&q=80',
-  },
-  ];
+  const [slides, setSlides] = useState([]);
+  const [images, setCategory] = useGetImages(process.env.REACT_APP_ACCESS_KEY as string);
+
+  useEffect(() => {
+    const param = window.location.pathname.slice(1);
+    if (param) setCategory(param);
+  }, []);
+
+  useEffect(() => {
+    const preSlides: any = [];
+    images.map(image => (
+      preSlides.push({
+        id: image.id,
+        url: image.urls.regular,
+        name: image.alt_description,
+      })
+    ));
+
+    setSlides(preSlides);
+  }, [images, setCategory]);
 
   return (
-    // <Slider slides={images} autoPlay={3} />
-    <Slider slides={images} />
+    <div className="App">
+      {slides.length > 0 && <QuickSlider slides={slides} />}
+    </div>
   );
 };
-
 export default App;
