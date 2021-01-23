@@ -11,6 +11,7 @@ const getWidth = () => window.innerWidth;
 interface Props {
   slides: SlideT[],
   autoPlay?: number,
+  dots?: boolean,
 }
 
 export interface SlideT {
@@ -20,7 +21,7 @@ export interface SlideT {
 
 type RefT = undefined | (()=> void)
 
-const Slider:FC<Props> = ({ slides = [], autoPlay }) => {
+const Slider:FC<Props> = ({ slides = [], autoPlay, dots = true }) => {
   const firstSlide = slides[0];
   const secondSlide = slides[1];
   const lastSlide = slides[slides.length - 1];
@@ -129,7 +130,7 @@ const Slider:FC<Props> = ({ slides = [], autoPlay }) => {
         <Arrow direction="right" handleClick={nextSlide} />
       </>
       )}
-      <Dots slides={slides} activeSlide={activeSlide} />
+      {dots && <Dots slides={slides} activeSlide={activeSlide} />}
     </Container>
   );
 };
